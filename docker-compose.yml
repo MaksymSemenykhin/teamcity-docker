@@ -31,7 +31,7 @@ services:
     networks:
       - teamcity
     depends_on:
-      - myqyl
+      - mysql
     
   teamcity-minimal-agent:
     restart: always
