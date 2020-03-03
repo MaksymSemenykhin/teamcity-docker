@@ -13,7 +13,7 @@ services:
       # Password for root access
       MYSQL_ROOT_PASSWORD: '${mysql_password_root}'
     volumes:
-      - mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     networks:
       - teamcity
 
