@@ -12,13 +12,12 @@ services:
       MYSQL_PASSWORD: '${mysql_password}'
       # Password for root access
       MYSQL_ROOT_PASSWORD: '${mysql_password_root}'
-#    ports:
-#      # <Port exposed> : < MySQL Port running inside container>
-#      - '127.0.01:3306:3306'      
     volumes:
       - ./mysql:/var/lib/mysql
     networks:
       - teamcity
+    mem_limit: 2000m
+    mem_reservation: 500m
 
   server:
     image: jetbrains/teamcity-server
@@ -39,7 +38,9 @@ services:
     environment:
       - SERVER_URL=http://${AGENT_HOST}:8111
       - AGENT_NAME=minimal_agent
-
+    mem_limit: 5000m
+    mem_reservation: 1000m
+  
 
 networks:
   teamcity:
