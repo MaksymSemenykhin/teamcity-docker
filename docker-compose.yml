@@ -17,7 +17,6 @@ services:
     networks:
       - teamcity
     memory: 2000m
-    memory-reservation: 500m
 
   server:
     image: jetbrains/teamcity-server
@@ -39,7 +38,6 @@ services:
       - SERVER_URL=http://${AGENT_HOST}:8111
       - AGENT_NAME=minimal_agent
     memory: 5000m
-    memory-reservation: 1000m
   
 
 networks:
