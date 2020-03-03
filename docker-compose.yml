@@ -16,7 +16,11 @@ services:
       - ./mysql:/var/lib/mysql
     networks:
       - teamcity
-    memory: 2000m
+    resources:
+      limits:
+        memory: 2000M
+      reservations:
+        memory: 500M
 
   server:
     image: jetbrains/teamcity-server
@@ -30,16 +34,19 @@ services:
       - teamcity
     depends_on:
       - mysql
-    
+    resources:
+      limits:
+        memory: 4000M
+      reservations:
+        memory: 1000M
+      
   teamcity-minimal-agent:
     restart: always
     image: jetbrains/teamcity-minimal-agent
     environment:
       - SERVER_URL=http://${AGENT_HOST}:8111
       - AGENT_NAME=minimal_agent
-    memory: 5000m
   
-
 networks:
   teamcity:
     # Use a custom driver
