@@ -17,6 +17,8 @@ services:
       - '127.0.01:3306:3306'      
     volumes:
       - ./mysql:/var/lib/mysql
+    networks:
+      - teamcity
 
   server:
       image: jetbrains/teamcity-server
@@ -26,7 +28,9 @@ services:
       volumes:
         - ./data_dir:/data/teamcity_server/datadir
         - ./log_dir:/opt/teamcity/logs
-
+      networks:
+        - teamcity
+    
   teamcity-minimal-agent:
     restart: always
     image: jetbrains/teamcity-minimal-agent
@@ -34,3 +38,9 @@ services:
       - SERVER_URL=http://${AGENT_HOST}:8111
       - AGENT_NAME=minimal_agent
 
+
+networks:
+  teamcity:
+    # Use a custom driver
+    driver: bridge
+      
