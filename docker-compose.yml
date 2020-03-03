@@ -25,8 +25,8 @@ services:
     volumes:
       - ./data_dir:/data/teamcity_server/datadir
       - ./log_dir:/opt/teamcity/logs
-      networks:
-        - teamcity
+    networks:
+      - teamcity
 
   teamcity-minimal-agent:
     restart: always
