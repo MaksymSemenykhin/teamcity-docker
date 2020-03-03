@@ -36,6 +36,9 @@ services:
     environment:
       - SERVER_URL=http://${AGENT_HOST}:8111
       - AGENT_NAME=minimal_agent
+    networks:
+      - teamcity
+      
   
 networks:
   teamcity:
