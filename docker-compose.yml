@@ -18,14 +18,14 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
 
-server:
-    image: jetbrains/teamcity-server
-    restart: always
-    ports:
-      - "${MAIN_PORT}:8111"
-    volumes:
-      - ./data_dir:/data/teamcity_server/datadir
-      - ./log_dir:/opt/teamcity/logs
+  server:
+      image: jetbrains/teamcity-server
+      restart: always
+      ports:
+        - "${MAIN_PORT}:8111"
+      volumes:
+        - ./data_dir:/data/teamcity_server/datadir
+        - ./log_dir:/opt/teamcity/logs
 
   teamcity-minimal-agent:
     restart: always
