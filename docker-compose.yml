@@ -23,8 +23,8 @@ services:
     ports:
       - "${MAIN_PORT}:8111"
     volumes:
-      - ./data_dir:/data/teamcity_server/datadir
-      - ./log_dir:/opt/teamcity/logs
+      - ./data:/data/teamcity_server/datadir
+      - ./logs:/opt/teamcity/logs
     networks:
       - teamcity
     depends_on:
