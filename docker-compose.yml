@@ -2,7 +2,7 @@
 version: "3.3"
 services:
   mysql:
-    name: teamcity-mysql
+    container_name: teamcity-mysql
     image: mysql
     restart: always
     environment:
@@ -19,7 +19,7 @@ services:
       - teamcity
 
   server:
-    name: teamcity-server
+    container_name: teamcity-server
     image: jetbrains/teamcity-server
     restart: always
     ports:
@@ -33,8 +33,9 @@ services:
       - mysql
       
   teamcity-agent_1:
-    restart: always
+    container_name: teamcity-agetn_1
     image: jetbrains/teamcity-agent
+    restart: always
     environment:
       - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
       - AGENT_NAME=agent_1
@@ -44,8 +45,9 @@ services:
       - teamcity
       
   teamcity-agent_2:
-    restart: always
+    container_name: teamcity-agetn_2
     image: jetbrains/teamcity-agent
+    restart: always
     environment:
       - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
       - AGENT_NAME=agent_2
