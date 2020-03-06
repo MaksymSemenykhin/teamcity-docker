@@ -41,8 +41,6 @@ services:
       - AGENT_NAME=agent_1
     volumes:
       - ./agent_1/data:/data/teamcity_agent/conf
-    networks:
-      - teamcity
       
   teamcity-agent_2:
     container_name: teamcity-agetn_2
@@ -53,9 +51,17 @@ services:
       - AGENT_NAME=agent_2
     volumes:
       - ./agent_2/data:/data/teamcity_agent/conf
-    networks:
-      - teamcity      
-      
+
+  teamcity-agent_3:
+    container_name: teamcity-agetn_3
+    image: jetbrains/teamcity-agent
+    restart: always
+    environment:
+      - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
+      - AGENT_NAME=agent_3
+    volumes:
+      - ./agent_3/data:/data/teamcity_agent/conf      
+
 networks:
   teamcity:
     driver: bridge
