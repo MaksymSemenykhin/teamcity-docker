@@ -1,7 +1,7 @@
 
 version: "3.3"
 services:
-  mysql:
+  teamcity-mysql:
     container_name: teamcity-mysql
     image: mysql
     restart: always
@@ -18,7 +18,7 @@ services:
     networks:
       - teamcity
 
-  server:
+  teamcity-server:
     container_name: teamcity-server
     image: jetbrains/teamcity-server
     restart: always
