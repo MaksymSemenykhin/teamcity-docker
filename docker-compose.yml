@@ -37,11 +37,22 @@ services:
     image: jetbrains/teamcity-agent
     environment:
       - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
-      - AGENT_NAME=minimal_agent_1
+      - AGENT_NAME=agent_1
     volumes:
       - ./agent_1/data:/data/teamcity_agent/conf
     networks:
       - teamcity
+      
+  teamcity-agent_2:
+    restart: always
+    image: jetbrains/teamcity-agent
+    environment:
+      - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
+      - AGENT_NAME=agent_2
+    volumes:
+      - ./agent_2/data:/data/teamcity_agent/conf
+    networks:
+      - teamcity      
       
 networks:
   teamcity:
