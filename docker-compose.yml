@@ -30,9 +30,7 @@ services:
     networks:
       - teamcity
     depends_on:
-      - mysql
-    networks:
-      - teamcity
+      - teamcity-mysql
       
   teamcity-agent_1:
     container_name: teamcity-agetn_1
@@ -45,6 +43,9 @@ services:
       - ./agent_1/data:/data/teamcity_agent/conf
     networks:
       - teamcity
+    depends_on:
+      - teamcity-server
+            
       
   teamcity-agent_2:
     container_name: teamcity-agetn_2
@@ -57,6 +58,8 @@ services:
       - ./agent_2/data:/data/teamcity_agent/conf
     networks:
       - teamcity
+    depends_on:
+      - teamcity-server
 
   teamcity-agent_3:
     container_name: teamcity-agetn_3
@@ -69,6 +72,9 @@ services:
       - ./agent_3/data:/data/teamcity_agent/conf      
     networks:
       - teamcity
+    depends_on:
+      - teamcity-server
+      
 
 networks:
   teamcity:
