@@ -7,11 +7,8 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: '${teamcity_db}'
-      # So you don't have to use root, but you can if you like
       MYSQL_USER: '${mysql_user}'
-      # You can use whatever password you like
       MYSQL_PASSWORD: '${mysql_password}'
-      # Password for root access
       MYSQL_ROOT_PASSWORD: '${mysql_password_root}'
     volumes:
       - ./db/data:/var/lib/mysql
@@ -33,11 +30,11 @@ services:
       - teamcity-mysql
       
   teamcity-agent_1:
-    container_name: teamcity-agetn_1
+    container_name: teamcity-agent_1
     image: jetbrains/teamcity-agent
     restart: always
     environment:
-      - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
+      - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_1
     volumes:
       - ./agent_1/data:/data/teamcity_agent/conf
@@ -48,11 +45,11 @@ services:
             
       
   teamcity-agent_2:
-    container_name: teamcity-agetn_2
+    container_name: teamcity-agent_2
     image: jetbrains/teamcity-agent
     restart: always
     environment:
-      - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
+      - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_2
     volumes:
       - ./agent_2/data:/data/teamcity_agent/conf
@@ -62,11 +59,11 @@ services:
       - teamcity-server
 
   teamcity-agent_3:
-    container_name: teamcity-agetn_3
+    container_name: teamcity-agent_3
     image: jetbrains/teamcity-agent
     restart: always
     environment:
-      - SERVER_URL=localhost:8111
+      - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_3
     volumes:
       - ./agent_3/data:/data/teamcity_agent/conf      
@@ -74,7 +71,6 @@ services:
       - teamcity
     depends_on:
       - teamcity-server
-      
 
 networks:
   teamcity:
