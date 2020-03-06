@@ -34,7 +34,7 @@ services:
     restart: always
     image: jetbrains/teamcity-minimal-agent
     environment:
-      - SERVER_URL=http://${AGENT_HOST}:8111
+      - SERVER_URL=http://${SERVER_HOST}:${MAIN_PORT}
       - AGENT_NAME=minimal_agent
     networks:
       - teamcity
@@ -42,6 +42,5 @@ services:
   
 networks:
   teamcity:
-    # Use a custom driver
     driver: bridge
       
