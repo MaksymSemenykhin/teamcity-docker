@@ -44,20 +44,32 @@ services:
       - teamcity-server
            
   teamcity-agent_2:
-    extends: agent_1    
+    image: jetbrains/teamcity-minimal-agent
+    restart: always
     container_name: teamcity-agent_2
     environment:
+      - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_2
     volumes:
       - ./agent_2/data:/data/teamcity_agent/conf
+    networks:
+      - teamcity
+    depends_on:
+      - teamcity-server
 
   teamcity-agent_3:
-    extends: agent_1    
+    image: jetbrains/teamcity-minimal-agent
+    restart: always
     container_name: teamcity-agent_3
     environment:
+      - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_3
     volumes:
       - ./agent_3/data:/data/teamcity_agent/conf
+    networks:
+      - teamcity
+    depends_on:
+      - teamcity-server
 
 networks:
   teamcity:
