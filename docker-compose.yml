@@ -2,6 +2,7 @@
 version: "3.3"
 services:
   mysql:
+    name: teamcity-mysql
     image: mysql
     restart: always
     environment:
@@ -13,33 +14,35 @@ services:
       # Password for root access
       MYSQL_ROOT_PASSWORD: '${mysql_password_root}'
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./db/data:/var/lib/mysql
     networks:
       - teamcity
 
   server:
+    name: teamcity-server
     image: jetbrains/teamcity-server
     restart: always
     ports:
       - "${MAIN_PORT}:8111"
     volumes:
-      - ./data:/data/teamcity_server/datadir
-      - ./logs:/opt/teamcity/logs
+      - ./server/data:/data/teamcity_server/datadir
+      - ./server/logs:/opt/teamcity/logs
     networks:
       - teamcity
     depends_on:
       - mysql
       
-  teamcity-minimal-agent:
+  teamcity-agent_1:
     restart: always
-    image: jetbrains/teamcity-minimal-agent
+    image: jetbrains/teamcity-agent
     environment:
-      - SERVER_URL=http://${SERVER_HOST}:${MAIN_PORT}
-      - AGENT_NAME=minimal_agent
+      - SERVER_URL=${SERVER_HOST}:${MAIN_PORT}
+      - AGENT_NAME=minimal_agent_1
+    volumes:
+      - ./agent_1/data:/data/teamcity_agent/conf
     networks:
       - teamcity
       
-  
 networks:
   teamcity:
     driver: bridge
