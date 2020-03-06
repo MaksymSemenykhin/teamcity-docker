@@ -20,7 +20,7 @@ services:
     image: jetbrains/teamcity-server
     restart: always
     ports:
-      - "${MAIN_PORT}:8111"
+      - "${SERVER_PORT}:8111"
     volumes:
       - ./server/data:/data/teamcity_server/datadir
       - ./server/logs:/opt/teamcity/logs
