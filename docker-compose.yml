@@ -38,6 +38,7 @@ services:
       - AGENT_NAME=agent_1
     volumes:
       - ./agent_1/data:/data/teamcity_agent/conf
+      - ./agent_1/.ssh:/root/.ssh      
     networks:
       - teamcity
     depends_on:
