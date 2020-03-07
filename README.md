@@ -3,7 +3,7 @@
 DOCKER WITH MYSQL AND ONE AGENT
 ------------
 1. Teamcity (`80` port by default)
-2. MYSQL `teamcity-mysql` host accessible from docker `teamcity` network
+2. MYSQL `teamcity-mysql` host accessible from docker `teamcity` network, user and password can be changed in .env
 3. Teamcity agent connected to server via docker `teamcity` network
 
 
