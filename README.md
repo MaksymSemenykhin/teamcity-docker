@@ -12,6 +12,7 @@ SHARED FOLDERS
 1. Teamcity ./server/data and ./server/logs
 2. Mysql ./db/data
 3. Teamcity agent ./agent_1/data
+3. Teamcity agent ssh keys folder ./agent_1/.ssh
 
 
 DOCKER WITH MYSQL AND THREE AGENTS
