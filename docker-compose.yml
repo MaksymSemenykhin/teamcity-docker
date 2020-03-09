@@ -28,24 +28,23 @@ services:
       - teamcity
     depends_on:
       - teamcity-mysql
-      
+
   teamcity-agent_1:
     container_name: teamcity-agent_1
-    image: jetbrains/teamcity-minimal-agent
+    build: ./agent_1
     restart: always
     environment:
       - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_1
     volumes:
       - ./agent_1/data:/data/teamcity_agent/conf
-      - ./agent_1/.ssh:/root/.ssh      
+      - ./agent_1/.ssh:/root/.ssh
     networks:
       - teamcity
     depends_on:
       - teamcity-server
-          
+
 
 networks:
   teamcity:
     driver: bridge
-      

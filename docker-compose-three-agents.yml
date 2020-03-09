@@ -28,32 +28,32 @@ services:
       - teamcity
     depends_on:
       - teamcity-mysql
-      
+
   teamcity-agent_1:
     container_name: teamcity-agent_1
-    image: jetbrains/teamcity-minimal-agent
+    build: ./agent_1
     restart: always
     environment:
       - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_1
     volumes:
       - ./agent_1/data:/data/teamcity_agent/conf
-      - ./agent_1/.ssh:/root/.ssh      
+      - ./agent_1/.ssh:/root/.ssh
     networks:
       - teamcity
     depends_on:
       - teamcity-server
-           
+
   teamcity-agent_2:
     image: jetbrains/teamcity-minimal-agent
     restart: always
-    container_name: teamcity-agent_2
+    build: ./agent_2
     environment:
       - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_2
     volumes:
       - ./agent_2/data:/data/teamcity_agent/conf
-      - ./agent_2/.ssh:/root/.ssh      
+      - ./agent_2/.ssh:/root/.ssh
     networks:
       - teamcity
     depends_on:
@@ -62,13 +62,13 @@ services:
   teamcity-agent_3:
     image: jetbrains/teamcity-minimal-agent
     restart: always
-    container_name: teamcity-agent_3
+    build: ./agent_3
     environment:
       - SERVER_URL=teamcity-server:8111
       - AGENT_NAME=agent_3
     volumes:
       - ./agent_3/data:/data/teamcity_agent/conf
-      - ./agent_3/.ssh:/root/.ssh      
+      - ./agent_3/.ssh:/root/.ssh
     networks:
       - teamcity
     depends_on:
@@ -77,4 +77,3 @@ services:
 networks:
   teamcity:
     driver: bridge
-      
